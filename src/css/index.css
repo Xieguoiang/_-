@@ -1,0 +1,51 @@
+.nav{
+  display: flex;
+
+}
+#myDiagramDiv>canvas::-webkit-scrollbar { 
+  width: 1 !important
+}
+.nav>div{
+  flex: 1;
+  border:0.5px solid #ccc;
+  border-bottom: none;
+  border-right: none;
+}
+ul>li{
+  line-height: 26px;
+  font-size: 12px;
+
+}
+ul>li>img{
+  margin-left: 20%;
+  margin-right: 5%;
+  vertical-align: middle;
+}
+ul>li:hover{
+  cursor: pointer;
+  background: #ccc; 
+}
+
+.nav_label:hover{
+  cursor: pointer;
+}
+
+#menu {
+  width: 0;
+  height: 125px;
+  overflow: hidden;
+  box-shadow: 0 1px 1px #888,1px 0 1px #ccc;
+  position: absolute;
+  z-index: 1000;
+}
+.menu {
+  width: 130px;
+  height: 25px;
+  line-height: 25px;
+  padding: 0 10px;
+}
+
+.smallNav{
+  line-height: 30px;
+  border: 0.5px solid #ccc;
+}

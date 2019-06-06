@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="description" content="Interactive demonstration of physics layout features by the ForceDirectedLayout class." />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Copyright 1998-2019 by Northwoods Software Corporation. E-->
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link rel="stylesheet" type="text/css" href="../css/index.css">
+  <script src="../js/ForceDirectedLayout.js"></script>
+  <script src="../js/go.js"></script>
+   <style>
+     .nav_content{
+      border-bottom: 1px solid #ccc;
+      display: none;
+      /*line-height: 60px;*/
+     }
+     .nav_content>span{
+      display: inline-block;
+      text-align: center;
+      width: 60px;
+      height: 55px;
+      font-size: 12px;
+     }
+     .nav_content>span:hover{
+      background: #CCC;
+      cursor: pointer;
+     }
+     .nav_conten>.currentSpan{
+      border:0.5px solid #ccc;
+     }
+     
+     .nav_label{
+      border-bottom: 0.5px solid #ccc;
+      line-height: 30px;
+      font-size: 12px;
+     }
+     .nav_label>span{
+      display: inline-block;
+      padding-left: 10px;
+      padding-right: 10px;
+     }
+     .nav_label>span:hover{
+        background: #ccc;
+        cursor: pointer;
+     }
+   </style>
+
+</head>
+
+<body>
+<div id="sample">
+
+      <div class="nav_header">
+              <p class="nav_label">
+                <span onclick="setNavContent(1)">文件</span>
+                <span onclick="setNavContent(2)">视图</span>
+                <span onclick="setNavContent(3)">编辑</span>
+                <span onclick="setNavContent(4)">布局</span>
+                <span onclick="setNavContent(5)">分析</span>
+                <span onclick="setNavContent(6)">过滤</span>
+               
+              </p>
+              <p class="nav_content x_file">
+                <!-- <span><img src="../img/clear.png" width="30" height="30"><br/>清空</span> -->
+                <!-- <span><img src="../img/clear.png" width="30" height="30"><br/>打印</span> -->
+                <span onclick="makeBlob()"><img src="../img/tp.png" width="30" height="30"><br/>存为图片</span>
+                <span onclick="makeSvg()"><img src="../img/svg.png" width="30" height="30"><br/>存为SVG</span>
+                <span><img src="../img/history.png" width="30" height="30"><br/>存为历史</span>
+                <!-- <span><img src="../img/clear.png" width="30" height="30"><br/>历史图表</span>/ -->
+                <!-- <span><img src="../img/clear.png" width="30" height="30"><br/>图表导入</span> -->
+                <!-- <span><img src="../img/clear.png" width="30" height="30"><br/>图表导出</span> -->
+              </p>
+              <p class="nav_content x_view">
+                <span onclick="setViewSize()"><img src="../img/setView.png" width="30" height="30"><br/>大图</span>
+                <span><img src="../img/setView.png" width="30" height="30"><br/>边属性</span>
+                
+              </p>
+              <p class="nav_content x_edit">
+                <span onclick="deleteSelection()"><img src="../img/delete.png" width="30" height="30"><br/>删除</span>
+                <span onclick="undo()"><img src="../img/cx.png" width="30" height="30"><br/>撤销</span>
+                <span onclick="selectAll()"><img src="../img/qx.png" width="30" height="30"><br/>全选</span>
+                <span onclick="reverseSelected()"><img src="../img/fx.png" width="30" height="30"><br/>反选</span>
+                <!-- <span onclick="deleteSelection()"><img src="../img/edit.png" width="30" height="30"><br/>隐藏</span> -->
+                <span onclick="deleteSelection()"><img src="../img/edit.png" width="30" height="30"><br/>编辑</span>
+              </p>
+              <p class="nav_content x_layout">
+                <span onclick="changedLayout('LayeredDigraphLayout')"><img src="../img/layout.png" width="30" height="30"><br/>层次布局</span>
+                <span onclick="changedLayout('GridLayout')"><img src="../img/layout.png" width="30" height="30"><br/>网状布局</span>
+                <span onclick="changedLayout('CircularLayout')"><img src="../img/cir.png" width="30" height="30"><br/>圆形布局</span>
+                <span onclick="changedLayout('TreeLayout')"><img src="../img/layout.png" width="30" height="30"><br/>树形布局</span>
+                <span onclick="changedLayout('ForceDirectedLayout')"><img src="../img/layout.png" width="30" height="30"><br/>弹性布局</span>
+                <span onclick="changedLayout('sankey')"><img src="../img/sankey.png" width="30" height="30"><br/>流向布局</span>
+              </p>
+              <p class="nav_content x_analyse">
+                <span><img src="../img/analyse.png" width="30" height="30"><br/>环路分析</span>
+                <span><img src="../img/analyse.png" width="30" height="30"><br/>链路分析</span>
+                
+              </p>
+              <p class="nav_content x_filter">
+                <span><img src="../img/analyse.png" width="30" height="30"><br/>100w以上</span>
+                <span><img src="../img/analyse.png" width="30" height="30"><br/>10w以上</span>
+                
+              </p>
+      </div>
+      
+    
+      <div id="menu">
+        <div class="menu">
+            功能1
+        </div>
+        <div class="menu">
+            功能2
+        </div>
+        <div class="menu">
+            功能3
+        </div>
+        <div class="menu">
+            功能4
+        </div>
+        <div class="menu">
+            功能5
+        </div>
+      </div>
+  <div id="myDiagramDiv" style="background: white; width: 100%;"></div>
+   <div id="myPaletteDiv" style="width: 200px; height: 100px;">
+    </div>
+  <div id="myOverviewDIV" style="width: 15%; height: 20%;position: absolute;bottom: 5px;right: 0;z-index: 30;background: #fff">
+  
+</div>
+<script src="../js/jquery.js"></script>
+<script src="../js/layout.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/index.js"></script>
+<script src="../js/api.js"></script>
+<script type="text/javascript"></script>
+<script id="code">
+    
+   function setNavContent(status){
+      switch (status){
+            case 1:
+            $(".nav_content").hide()
+            $(".x_file").show()
+            $("#myDiagramDiv").height($(window).height() - $(".nav_header").height())
+            console.log( $(".nav_header").height(),$("#myDiagramDiv").height())
+            myDiagram.requestUpdate()
+
+            break
+            case 2:
+             $(".nav_content").hide()
+             $(".x_view").show()
+             $("#myDiagramDiv").height($(window).height()-$(".nav_header").height()) 
+             myDiagram.requestUpdate()
+            break
+            case 3:
+             $(".nav_content").hide() 
+             $(".x_edit").show() 
+             $("#myDiagramDiv").height($(window).height()-$(".nav_header").height()) 
+             myDiagram.requestUpdate()
+            break
+            case 4:
+             $(".nav_content").hide()
+             $(".x_layout").show() 
+             $("#myDiagramDiv").height($(window).height()-$(".nav_header").height()) 
+             myDiagram.requestUpdate()
+            break
+            case 5:
+             $(".nav_content").hide()
+             $(".x_analyse").show() 
+             $("#myDiagramDiv").height($(window).height()-$(".nav_header").height()) 
+             myDiagram.requestUpdate()
+            break
+            case 6:
+             $(".nav_content").hide()
+             $(".x_filter").show() 
+             $("#myDiagramDiv").height($(window).height()-$(".nav_header").height())
+             myDiagram.requestUpdate()
+            break
+            default:
+             // $(".nav_content").hide() && $(".x_view").show()
+            break;
+        }   
+   }
+    
+   function setViewSize(){
+      $(".nav_content").hide()
+      $("#myDiagramDiv").height($(window).height()-$(".nav_header").height()) 
+   }
+
+   //加载完成toast隐藏
+   myDiagram.addDiagramListener("LayoutCompleted",function(e){
+        
+   })
+
+  </script>
+</body>
+</html>
