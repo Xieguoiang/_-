@@ -30,7 +30,7 @@
                 │      
                 ├─img			//img图片资源文件夹
                 │      xxx.png      //各类icon&background...图片
-            │      
+                │      
                 └─js				// js脚本文件夹
                         api.js         //api接口函数文件	
                         data.js		//开发测试数据
