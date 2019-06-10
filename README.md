@@ -1,4 +1,4 @@
-### visualization_components   //项目名称
+     # visualization_components   //项目名称
 
             │  gulpfile.js             //开发生产环境代码压缩配置
             │  package-lock.json	// 依赖包json
